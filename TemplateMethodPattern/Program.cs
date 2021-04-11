@@ -46,4 +46,20 @@ namespace TemplateMethodPattern
             Console.WriteLine("Hello World!");
         }
     }
+
+
+    public abstract class AbstGameConnectHelper
+    {
+        protected abstract string DoSecurity(string str);
+        protected abstract bool Authentication(string id, string password);
+        protected abstract int Authorization(string userName);
+        protected abstract string Connection(string info);
+
+        // 템플릿 메소드 
+        public string requestConnection(string str)
+        {
+            return null;
+        }
+
+    }
 }
