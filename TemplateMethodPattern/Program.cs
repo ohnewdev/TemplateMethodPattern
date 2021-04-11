@@ -44,6 +44,13 @@ namespace TemplateMethodPattern
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+
+            AbstGameConnectHelper helper = new DefaultGameConnectionHelper();
+            helper.requestConnection("확인");
+
+
+
+
         }
     }
 
@@ -56,10 +63,66 @@ namespace TemplateMethodPattern
         protected abstract string Connection(string info);
 
         // 템플릿 메소드 
-        public string requestConnection(string str)
+        public string requestConnection(string encodedInfo)
         {
+            //보안 과정 -> 암호화 된 문자열을 복호화 코드
+            string decodedInfo = DoSecurity(encodedInfo);
+
+            // 반환된 것을 가지고 아이디, 암호를 할당한다.
+            string id = "AAA";
+            string password = "BBB";
+            if (Authentication(id, password))
+            {
+
+            }
+
+            string userName = "userName";
+            int i = Authorization(userName);
+            switch (i)
+            {
+                case 0: //권한 1
+                    Console.WriteLine();
+                    break;
+                case 1: //권한 1
+                    break;
+                case 2: //권한 1
+                    break;
+                case 3: //권한 1
+                    break;
+                default: //기타사항
+                    break;
+
+            }
             return null;
         }
 
+    }
+
+
+    public class DefaultGameConnectionHelper : AbstGameConnectHelper
+    {
+        protected override bool Authentication(string id, string password)
+        {
+            Console.WriteLine("권한확인");
+            return true;
+        }
+
+        protected override int Authorization(string userName)
+        {
+            Console.WriteLine("확인");
+            return 0;
+        }
+
+        protected override string Connection(string info)
+        {
+            Console.WriteLine("id pw 확인");
+            return info;
+        }
+
+        protected override string DoSecurity(string str)
+        {
+            Console.WriteLine("디코드");
+            return str;
+        }
     }
 }
